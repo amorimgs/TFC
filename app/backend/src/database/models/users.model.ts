@@ -12,7 +12,7 @@ class SequelizeUsers extends Model<InferAttributes<SequelizeUsers>,
 InferCreationAttributes<SequelizeUsers>> {
   declare id: CreationOptional<number>;
   declare username: string;
-  declare role: number;
+  declare role: string;
   declare email: string;
   declare password: string;
 }
