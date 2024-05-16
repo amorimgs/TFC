@@ -53,7 +53,6 @@ describe('Seu teste', () => {
     expect(chaiHttpResponse.status).to.be.eq(200);
     expect(chaiHttpResponse.body).to.be.deep.eq({id: 1, teamName: 'Time 1'});
   });
-
   /*it('Seu sub-teste', () => {
     expect(false).to.be.eq(true);
   });*/
