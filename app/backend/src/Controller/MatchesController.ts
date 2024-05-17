@@ -13,4 +13,28 @@ export default class TeamsController {
     const result = await this.service.getAllMatches();
     res.status(result.status).json(result.data);
   }
+
+  async finishMatch(req: Request, res: Response) {
+    const { id } = req.params;
+    const result = await this.service.finishMatch(Number(id));
+    res.status(result.status).json(result.data);
+  }
+
+  async updateMatch(req: Request, res: Response) {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const result = await this.service.updateMatch(Number(id), homeTeamGoals, awayTeamGoals);
+    res.status(result.status).json(result.data);
+  }
+
+  async insertMatch(req: Request, res: Response) {
+    const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = req.body;
+    const result = await this.service.insertMatch(
+      homeTeamId,
+      awayTeamId,
+      homeTeamGoals,
+      awayTeamGoals,
+    );
+    res.status(result.status).json(result.data);
+  }
 }

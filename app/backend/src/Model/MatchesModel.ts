@@ -18,4 +18,30 @@ export default class MatchesModel {
       }] });
     return result;
   }
+
+  async updateInProgressMatch(matchId: number) {
+    const matchUpdat = await this.model.update({ inProgress: false }, { where: { id: matchId } });
+    return matchUpdat;
+  }
+
+  async updateMatches(id:number, homeTeamGoals:number, awayTeamGoals:number) {
+    const matchUpdat = await this.model.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    return matchUpdat;
+  }
+
+  async insertMatch(
+    homeTeamId: number,
+    awayTeamId: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ) {
+    const result = await this.model.create({
+      homeTeamId,
+      awayTeamId,
+      homeTeamGoals,
+      awayTeamGoals,
+      inProgress: true,
+    });
+    return result;
+  }
 }
