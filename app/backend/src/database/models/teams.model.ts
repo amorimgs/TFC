@@ -12,6 +12,23 @@ class SequelizeTeams extends Model<InferAttributes<SequelizeTeams>,
 InferCreationAttributes<SequelizeTeams>> {
   declare id: CreationOptional<number>;
   declare teamName: string;
+  declare homeMatches?: {
+    id: number;
+    homeTeamId: number;
+    homeTeamGoals: number;
+    awayTeamId: number;
+    awayTeamGoals: number;
+    inProgress: boolean;
+  }[];
+
+  declare awayMatches?: {
+    id: number;
+    homeTeamId: number;
+    homeTeamGoals: number;
+    awayTeamId: number;
+    awayTeamGoals: number;
+    inProgress: boolean;
+  }[];
 }
 
 SequelizeTeams.init({
