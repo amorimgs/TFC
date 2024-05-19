@@ -12,4 +12,8 @@ router.get('/away', (req: Request, res: Response) => {
   matchesController.getAllLeaderboardHome(req, res);
 });
 
+router.get('/', (req: Request, res: Response) => {
+  matchesController.getAll(req, res);
+});
+
 export default router;

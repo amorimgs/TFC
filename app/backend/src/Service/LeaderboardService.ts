@@ -56,4 +56,29 @@ export default class LeaderboardService {
     }).sort(this.sortLeaderboard);
     return { status: 200, data: FR };
   }
+
+  async getAll() {
+    const result = await this.model.getAll();
+    const FR = result.map((team: any) => {
+      const matcheHome = this.formatMatchLeaderboard(team.homeMatches, 'home');
+      const matcheAway = this.formatMatchLeaderboard(team.awayMatches, 'away');
+      const goalsFavor = matcheHome.goalsFavor + matcheAway.goalsFavor;
+      const goalsOwn = matcheHome.goalsOwn + matcheAway.goalsOwn;
+      const totalPoints = matcheHome.totalPoints + matcheAway.totalPoints;
+      const totalGames = matcheHome.totalGames + matcheAway.totalGames;
+      return {
+        name: team.teamName,
+        totalPoints,
+        totalGames,
+        totalVictories: matcheHome.totalVictories + matcheAway.totalVictories,
+        totalDraws: matcheHome.totalDraws + matcheAway.totalDraws,
+        totalLosses: matcheHome.totalLosses + matcheAway.totalLosses,
+        goalsFavor,
+        goalsOwn,
+        goalsBalance: goalsFavor - goalsOwn,
+        efficiency: (totalPoints / (totalGames * 3)) * 100,
+      };
+    }).sort(this.sortLeaderboard);
+    return { status: 200, data: FR };
+  }
 }

@@ -18,4 +18,22 @@ export default class LeaderboardModel {
     });
     return result;
   }
+
+  async getAll() {
+    const result = await this.model.findAll({
+      include: [{
+        model: MatchesModel,
+        where: { inProgress: false },
+        as: 'homeMatches',
+        attributes: { exclude: ['id', 'inProgess'] },
+      }, {
+        model: MatchesModel,
+        where: { inProgress: false },
+        as: 'awayMatches',
+        attributes: { exclude: ['id', 'inProgess'],
+        } }],
+      attributes: { exclude: ['id'] },
+    });
+    return result;
+  }
 }
